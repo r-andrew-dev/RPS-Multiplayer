@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: #0100F8;
+}
+
+h1 {
+    color: white;
+    font-family: 'Chewy', cursive;
+    font-size: 100px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#start-button {
+
+    position: relative;
+    left: -25px;
+
+    background-color: black;
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'Gudea', sans-serif;
+    padding: 3% 25%;
+    text-align: center;
+    outline: none;
+    border: 1px solid black;
+
+}
+
+#start-button:hover {
+    background-color: #00F802;
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+
+}
+
+#start-div {
+    position: fixed;
+    top: 30%;
+    left: 35%;
+}
