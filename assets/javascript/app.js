@@ -14,6 +14,21 @@ var firebaseConfig = {
 
   $("#start-button").on("click", function() {
 
-    console.log("clicked");
+    divClone = $("#container").clone(true);
+
+    $("#start-div").hide();
+
+    chooseDiv = $("<div class='choose-div'>");
+
+    var choices = ["Bird", "Apple", "Worm"];
+
+    for (i = 0; i < choices.length; i++) {
+      button = $("<button class='choice' id=" + i + ">");
+      button.text(choices[i])
+      chooseDiv.append(button);
+
+    }
+
+    $("#container").append(chooseDiv);
     
     });
