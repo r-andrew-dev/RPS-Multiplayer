@@ -23,9 +23,10 @@ var firebaseConfig = {
     var choices = ["Bird", "Apple", "Worm"];
 
     for (i = 0; i < choices.length; i++) {
-      button = $("<button class='choice' id=" + i + ">");
+      button = $("<button class='choice button' id=" + i + ">");
       button.text(choices[i])
       chooseDiv.append(button);
+      chooseDiv.append("<br>");
 
     }
 
