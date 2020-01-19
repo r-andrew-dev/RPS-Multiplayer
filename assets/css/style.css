@@ -5,14 +5,7 @@
 
 body {
     background-color: #0100F8;
-}
 
-h1 {
-    color: white;
-    font-family: 'Chewy', cursive;
-    font-size: 100px;
-    font-weight: bold;
-    letter-spacing: 2px;
 }
 
 .button {
@@ -27,6 +20,23 @@ h1 {
     outline: none;
     border: 1px solid black;
 }
+
+.button:hover {
+    background-color: #00F802;
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+
+}
+
+.font-effect-3d-float {
+    color: white;
+    font-family: 'Chewy', cursive;
+    font-size: 100px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
 #start-button {
 
     position: relative;
@@ -36,23 +46,31 @@ h1 {
 
 }
 
-#start-button:hover {
-    background-color: #00F802;
-    color: white;
-    font-size: 100px;
-    font-weight: bold;
-
-}
-
 #start-div {
     position: fixed;
     top: 30%;
     left: 35%;
 }
 
+#choose-div {
+    position: fixed;
+    top: 15%;
+    left: 35%; 
+}
+
 .choice {
-    /* position: relative;
-    top: 30%;
-    left: 45%; */
-    
+    width: 80%;
+}
+
+#Choice-0:active {
+    background-color: purple;
+}
+
+#Choice-1:active {
+    background-color: orange;
+
+}
+
+#Choice-2:active {
+    background-color: pink;
 }
