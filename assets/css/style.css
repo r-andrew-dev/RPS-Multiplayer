@@ -58,6 +58,23 @@ body {
     left: 35%; 
 }
 
+#score-div {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    font-family: 'Gudea', sans-serif;
+    font-size: 40px;
+    padding: 1%;
+}
+
+#score {
+    font-size: 44px;
+    text-decoration: underline;
+    margin-bottom: 10%;
+}
+
 .choice {
     width: 80%;
 }
