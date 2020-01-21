@@ -26,19 +26,120 @@ const firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  let score = {
-    wins: 0,
-    losses: 0,
+  $("#sign-in-button").on("click", function() {
+
+  const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+  ui.start('#firebaseui-auth-container', {
+    signInOptions: [
+
+      {
+        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        requireDisplayName: false
+      },
+
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+
+    ]
+
+  });
+
+  const uiConfig = {
+    callbacks: {
+      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        return true;
+      },
+      uiShown: function() {
+        // The widget is rendered.
+        // Hide the loader.
+        document.getElementById('loader').style.display = 'none';
+      }
+    },
+    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    signInFlow: 'popup',
+    signInSuccessUrl: '<url-to-redirect-to-on-success>',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+
+    ],
+    // Terms of service url.
+    tosUrl: "",
+    // Privacy policy url.
+    privacyPolicyUrl: "",
+  };
+
+  ui.start('#firebaseui-auth-container', uiConfig);
+
+}
+
+  function createAccount() {
+    const displayName = $("#entry-displayname");
+    const email = $("#entry-email");
+    const password = ("#entry-password");
+
+    firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+    .then(function(user) {
+      
+      user.updateProfile({displayName: displayName.value});
+
+  });
+
+}
+
+  function signInWithEmailAndPassword() {
+    const email = $("#email");
+    const password = $("#password");
+
+    firebase.auth().signInWithEmailAndPassword(email.value, password.value);
   }
 
-  let playerCount = 0;
-  let choice1;
-  let choice2;
+  function signOut () {
 
+    firebase.auth().signOut().then(function() {
+      // add function for when user signs out
+    }).catch(function(error) {
+      // an error happened.
+    }
+    );
+
+  game = {
+    score:{
+    wins: 0,
+    losses: 0,
+  },
+  playerCount: 0,
+  choice1: "",
+  choice2: "",
+  gameId: "",
+}
 
   const dB = firebase.database();
 
+ function creatGame() {
+
+  dB.ref().push()({
+
+    gameData: game,
+    
+  })
+
+
+  }
+
   $("#start-button").on("click", function() {
+
+    dB.ref().on("value", function(snapshot) {
+
+      if (snapshot.child("game").exists() && snapshot.child("game/playerCount") === 2) {
+        createNewGame();}
+      else if (snapshot.child("game").exists() && snapshot.child("game/playerCount") === 1) {
+        addToGame();}
+      else {
+        createGame();
+      }
+    })
+    game.playerCount++
 
     divClone = $("#container").clone(true);
 
@@ -59,7 +160,7 @@ const firebaseConfig = {
     }
 
     const scoreDiv = $("<div id='score-div'>");
-    scoreDiv.html("<p id='score'>Score</p><p>Wins: " + score.wins + "</p><p>Losses: " + score.losses + "</p>");
+    scoreDiv.html("<p id='score'>Score</p><p>Wins: " + game.score.wins + "</p><p>Losses: " + game.score.losses + "</p>");
 
     $("#container").append(chooseDiv);
     $("#container").append(scoreDiv);
